@@ -18,12 +18,10 @@ class CreateCriminalsTable extends Migration
             $table->string("cin")->unique();
             $table->string("nom");
             $table->string("prenom");
-            $table->string("photo")->unique();
+            $table->enum("sexe", ["Femme","Homme"]);
             $table->date("dateNaissance");
             $table->string("ville");
             $table->string("tel");
-            $table->uuid("user_id");
-            $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();
         });
     }

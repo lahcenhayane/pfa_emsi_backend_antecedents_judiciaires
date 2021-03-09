@@ -17,8 +17,7 @@ class CreateFichiersTable extends Migration
             $table->uuid('id')->primary();
             $table->string("titre");
             $table->string("typeCrime");
-            $table->string("dateCraetion");
-            $table->string("text");
+            $table->string("descriptionFichier");
             $table->uuid("user_id");
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();

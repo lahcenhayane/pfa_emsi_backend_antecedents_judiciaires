@@ -27,7 +27,7 @@ class CriminalRequest extends FormRequest
             'cin' => 'required|string|unique:criminals|max:10|min:6',
             'nom' => 'required|string|max:50|min:4',
             'prenom' => 'required|string|max:60|min:3',
-            'photo' => 'string|max:2000|unique:criminals',
+//            'photo' => 'string|max:2000|unique:criminals',
             'dateNaissance'=>'required|date',
             'ville'=>'required|string|max:50|min:3',
             'tel'=>'required|string|min:10'

@@ -15,9 +15,6 @@ class User extends Authenticatable implements JWTSubject
     public function fichiers(){
         return $this->hasMany(Fichier::class);
     }
-    public function criminals(){
-        return $this->hasMany(Criminal::class);
-    }
 
 
     use Uuids;

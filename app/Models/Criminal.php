@@ -11,10 +11,7 @@ class Criminal extends Model
     use Uuids;
     use HasFactory;
 
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
     public function fichiers(){
-        return $this->hasMany(Fichier::class);
+        return $this->belongsToMany(Fichier::class, 'criminal_fichier', 'criminal_id', 'fichier_id', 'id', 'id');
     }
 }

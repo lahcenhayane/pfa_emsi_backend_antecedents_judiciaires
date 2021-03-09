@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string("ville");
             $table->string("tel");
-            $table->enum("role", ["Admin","GP","Criminal"]);
+            $table->enum("role", ["Admin","GP","Tribunal"]);
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();

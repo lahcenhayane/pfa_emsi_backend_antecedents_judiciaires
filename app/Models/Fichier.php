@@ -15,6 +15,6 @@ class Fichier extends Model
         return $this->belongsTo(User::class);
     }
     public function criminals(){
-        return $this->hasMany(Criminal::class);
+        return $this->belongsToMany(Criminal::class, 'criminal_fichier', 'fichier_id', 'criminal_id', 'id', 'id');
     }
 }

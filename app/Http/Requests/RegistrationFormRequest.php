@@ -29,7 +29,7 @@ class RegistrationFormRequest extends FormRequest
             'password' => 'required|string|min:6',
             'ville' => 'required|string',
             'tel' => 'required|string',
-            'role' => 'required|string|in:Admin,GP,Criminal'
+            'role' => 'required|string|in:Admin,GP,Tribunal'
         ];
     }
 }

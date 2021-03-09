@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegistrationFormRequest;
+use App\Models\Criminal;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -90,4 +91,39 @@ class UserController extends Controller
             'data'      =>  $user
         ], 200);
     }
+
+    public function index(){
+        return User::all();
+    }
+    public function info(){
+        return JWTAuth::parseToken()->authenticate();
+    }
+    public function destroy($id){
+        $user = User::Find($id);
+        $user->delete();
+    }
+    public function find($id){
+        return User::find($id);
+    }
+    public function update(Request $request){
+        $user = User::Find($request->id);
+        $user->name = $request->name;
+        if ($user->email != $request->email){
+            $user->email = $request->email;
+        }
+        if ($request->password != null){
+            $user->password = bcrypt($request->password);
+        }
+        $user->ville = $request->ville;
+        $user->tel = $request->tel;
+        $user->role = $request->role;
+        $user->updated_at = new DateTime();
+        $user->save();
+    }
+
+    public function countcriminal(){
+        return Criminal::count();
+        //return count($crim);
+    }
+
 }

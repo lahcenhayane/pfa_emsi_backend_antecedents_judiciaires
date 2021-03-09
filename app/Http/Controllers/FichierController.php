@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CriminalRequest;
 use App\Models\Criminal;
+use App\Models\Fichier;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class CriminalController extends Controller
+class FichierController extends Controller
 {
-
-    protected $user;
-
+    private $user;
     public function __construct()
     {
         $this->user = JWTAuth::parseToken()->authenticate();
     }
-
 
     /**
      * Display a listing of the resource.
@@ -25,7 +22,7 @@ class CriminalController extends Controller
      */
     public function index()
     {
-        return Criminal::all();
+        return Criminal::with('fichiers')->find('saqwei0923u-rdjkpowkj-d0923umx0r2e');
     }
 
     /**
@@ -34,33 +31,16 @@ class CriminalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CriminalRequest $request)
+    public function store(Request $request)
     {
-
-        $criminal =new Criminal();
-        $criminal->cin = $request->cin;
-        $criminal->nom = $request->nom;
-        $criminal->prenom = $request->prenom;
-        $criminal->dateNaissance = $request->dateNaissance;
-        $criminal->ville = $request->ville;
-        $criminal->tel = $request->tel;
-        $criminal->user_id = $this->user->id;
-        $criminal->photo = "lllll";
-        $criminal->save();
-
-        return $criminal;
-
-
-        /*
-        if ($criminal->hasFile('photo')) {
-            $destination_path = 'public/image/criminals';
-            $image = $request->file('photo');
-            $image_name = $image->getClientOriginalName();
-            $name = $request->cin+"."+$image_name +"."+$request->cin;
-            $path = $request->file('image')->storeAs($destination_path, $name);
-            $criminal->photo = $name;
-        }
-        */
+//        $fichier = new Fichier();
+//        $fichier->titre = $request->titre;
+//        $fichier->descriptionFichier = $request->descriptionFichier;
+//        $fichier->typeCrime = $request->typeCrime;
+//        $fichier->user_id = $this->user->id;
+//        $fichier->save();
+//        $fichier->criminals()->syncWithoutDetaching($request->criminals);
+//        return "OK";
     }
 
     /**
@@ -71,7 +51,7 @@ class CriminalController extends Controller
      */
     public function show($id)
     {
-        //
+        return null;
     }
 
     /**
@@ -82,7 +62,7 @@ class CriminalController extends Controller
      */
     public function edit($id)
     {
-        //
+        return "Put";
     }
 
     /**
@@ -94,7 +74,7 @@ class CriminalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return "Put 1";
     }
 
     /**
@@ -105,6 +85,6 @@ class CriminalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return "delete";
     }
 }
