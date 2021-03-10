@@ -20,7 +20,10 @@ Route::group(['middleware' => 'auth.jwt', 'cors'], function () {
     Route::get('logout', 'ApiController@logout');
     Route::get('/countcriminal', [UserController::class,'countcriminal']);
 
+    Route::put('/criminals/modifier', [CriminalController::class,'modifier']);
 
     Route::resource('/criminals', CriminalController::class);
     Route::resource('/fichiers',FichierController::class);
+    Route::get('/criminals/find/{id}', [CriminalController::class,'find']);
+
 });

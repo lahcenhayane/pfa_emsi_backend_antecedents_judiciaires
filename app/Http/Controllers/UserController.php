@@ -117,7 +117,6 @@ class UserController extends Controller
         $user->ville = $request->ville;
         $user->tel = $request->tel;
         $user->role = $request->role;
-        $user->updated_at = new DateTime();
         $user->save();
     }
 

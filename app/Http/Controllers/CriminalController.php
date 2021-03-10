@@ -44,8 +44,7 @@ class CriminalController extends Controller
         $criminal->dateNaissance = $request->dateNaissance;
         $criminal->ville = $request->ville;
         $criminal->tel = $request->tel;
-        $criminal->user_id = $this->user->id;
-        $criminal->photo = "lllll";
+        $criminal->sexe = $request->sexe;
         $criminal->save();
 
         return $criminal;
@@ -69,20 +68,9 @@ class CriminalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function find($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Criminal::find($id);
     }
 
     /**
@@ -92,9 +80,23 @@ class CriminalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+    }
+    public function modifier(Request $request)
+    {
+        $criminal = Criminal::Find($request->id);
+        if ($criminal->cin != $request->cin){
+            $criminal->cin = $request->cin;
+        }
+        $criminal->nom = $request->nom;
+        $criminal->prenom = $request->prenom;
+        $criminal->dateNaissance = $request->dateNaissance;
+        $criminal->ville = $request->ville;
+        $criminal->tel = $request->tel;
+        $criminal->sexe = $request->sexe;
+        $criminal->save();
     }
 
     /**
@@ -105,6 +107,7 @@ class CriminalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $criminal = Criminal::Find($id);
+        $criminal->delete();
     }
 }
