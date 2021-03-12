@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Criminal;
 use App\Models\Fichier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class FichierController extends Controller
@@ -22,7 +23,16 @@ class FichierController extends Controller
      */
     public function index()
     {
-        return Criminal::with('fichiers')->find('saqwei0923u-rdjkpowkj-d0923umx0r2e');
+//        //return Criminal::with('fichiers')->get();
+        return Fichier::with(['user'=>function($row){
+            $row->select('users.id', 'users.ville');
+        }])->get();
+
+//        return Fichier::with("victimes")->get();
+    }
+
+    public function getAllInformation($id){
+        return Fichier::with(['criminals','victimes'])->find($id);
     }
 
     /**
@@ -33,16 +43,20 @@ class FichierController extends Controller
      */
     public function store(Request $request)
     {
-//        $fichier = new Fichier();
-//        $fichier->titre = $request->titre;
-//        $fichier->descriptionFichier = $request->descriptionFichier;
-//        $fichier->typeCrime = $request->typeCrime;
-//        $fichier->user_id = $this->user->id;
-//        $fichier->save();
-//        $fichier->criminals()->syncWithoutDetaching($request->criminals);
-//        return "OK";
-    }
+        $fichier = new Fichier();
+        $fichier->numero = $request->numero;
+        $fichier->lieu = $request->lieu;
+        $fichier->descriptionFichier = $request->descriptionFichier;
+        $fichier->typeCrime = $request->typeCrime;
+        $fichier->user_id = $this->user->id;
+        $fichier->save();
 
+
+        $f =  Fichier::Where("numero", $request->numero)->first();
+        $f->criminals()->syncWithoutDetaching($request->listCriminales);
+        $f->victimes()->syncWithoutDetaching($request->listVictimes);
+        return $f;
+    }
     /**
      * Display the specified resource.
      *
@@ -55,26 +69,23 @@ class FichierController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return "Put";
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function modifier(Request $request)
     {
-        return "Put 1";
+        $fichier =  Fichier::Where("numero", $request->numero)->first();
+        $fichier->descriptionFichier = $request->descriptionFichier;
+        $fichier->typeCrime = $request->typeCrime;
+        $fichier->lieu = $request->lieu;
+        $fichier->user_id = $this->user->id;
+        $fichier->save();
+        $fichier->criminals()->syncWithoutDetaching($request->criminals);
+        $fichier->victimes()->syncWithoutDetaching($request->victimes);
+        return $fichier;
     }
 
     /**
@@ -85,6 +96,7 @@ class FichierController extends Controller
      */
     public function destroy($id)
     {
-        return "delete";
+        $fichier = Fichier::find($id);
+        $fichier->delete();
     }
 }

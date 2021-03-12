@@ -15,7 +15,8 @@ class CreateFichiersTable extends Migration
     {
         Schema::create('fichiers', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string("titre");
+            $table->string('numero');
+            $table->string('lieu');
             $table->string("typeCrime");
             $table->string("descriptionFichier");
             $table->uuid("user_id");

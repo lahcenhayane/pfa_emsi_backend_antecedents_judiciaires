@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CriminalRequest;
-use App\Models\Criminal;
+use App\Models\Victime;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class CriminalController extends Controller
+class VictimeController extends Controller
 {
-
     protected $user;
 
     public function __construct()
@@ -25,7 +24,7 @@ class CriminalController extends Controller
      */
     public function index()
     {
-        return Criminal::all();
+        return Victime::all();
     }
 
     /**
@@ -34,21 +33,21 @@ class CriminalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CriminalRequest $request)
+    public function store(Request $request)
     {
 
-        $criminal =new Criminal();
-        $criminal->cin = $request->cin;
-        $criminal->nom = $request->nom;
-        $criminal->addresse = $request->addresse;
-        $criminal->prenom = $request->prenom;
-        $criminal->dateNaissance = $request->dateNaissance;
-        $criminal->ville = $request->ville;
-        $criminal->tel = $request->tel;
-        $criminal->sexe = $request->sexe;
-        $criminal->save();
+        $victime =new Victime();
+        $victime->cin = $request->cin;
+        $victime->nom = $request->nom;
+        $victime->addresse = $request->addresse;
+        $victime->prenom = $request->prenom;
+        $victime->dateNaissance = $request->dateNaissance;
+        $victime->ville = $request->ville;
+        $victime->tel = $request->tel;
+        $victime->sexe = $request->sexe;
+        $victime->save();
 
-        return $criminal;
+        return $victime;
 
 
         /*
@@ -71,7 +70,7 @@ class CriminalController extends Controller
      */
     public function find($id)
     {
-        return Criminal::find($id);
+        return Victime::find($id);
     }
 
     /**
@@ -87,18 +86,18 @@ class CriminalController extends Controller
     }
     public function modifier(Request $request)
     {
-        $criminal = Criminal::Find($request->id);
-        if ($criminal->cin != $request->cin){
-            $criminal->cin = $request->cin;
+        $victime = Victime::Find($request->id);
+        if ($victime->cin != $request->cin){
+            $victime->cin = $request->cin;
         }
-        $criminal->nom = $request->nom;
-        $criminal->addresse = $request->addresse;
-        $criminal->prenom = $request->prenom;
-        $criminal->dateNaissance = $request->dateNaissance;
-        $criminal->ville = $request->ville;
-        $criminal->tel = $request->tel;
-        $criminal->sexe = $request->sexe;
-        $criminal->save();
+        $victime->nom = $request->nom;
+        $victime->addresse = $request->addresse;
+        $victime->prenom = $request->prenom;
+        $victime->dateNaissance = $request->dateNaissance;
+        $victime->ville = $request->ville;
+        $victime->tel = $request->tel;
+        $victime->sexe = $request->sexe;
+        $victime->save();
     }
 
     /**
@@ -109,7 +108,7 @@ class CriminalController extends Controller
      */
     public function destroy($id)
     {
-        $criminal = Criminal::Find($id);
-        $criminal->delete();
+        $victime = Victime::find($id);
+        $victime->delete();
     }
 }

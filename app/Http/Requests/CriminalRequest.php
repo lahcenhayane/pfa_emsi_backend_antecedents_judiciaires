@@ -29,8 +29,9 @@ class CriminalRequest extends FormRequest
             'prenom' => 'required|string|max:60|min:3',
             'sexe' => 'required|string|in:Femme,Homme',
             'dateNaissance'=>'required',
-            'ville'=>'required|string|max:50|min:3',
-            'tel'=>'required|string|min:10'
+            'addresse' => 'required|string',
+            'ville' => 'required|string|max:50|min:3',
+            'tel' => 'required|string|min:10'
         ];
     }
 }

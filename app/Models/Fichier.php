@@ -17,4 +17,7 @@ class Fichier extends Model
     public function criminals(){
         return $this->belongsToMany(Criminal::class, 'criminal_fichier', 'fichier_id', 'criminal_id', 'id', 'id');
     }
+    public function victimes(){
+        return $this->belongsToMany(Victime::class, 'victime_fichier', 'fichier_id', 'victime_id', 'id', 'id');
+    }
 }

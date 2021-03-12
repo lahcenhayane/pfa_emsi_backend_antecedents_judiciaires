@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCriminalFichierTable extends Migration
+class CreateVictimeFichierTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCriminalFichierTable extends Migration
      */
     public function up()
     {
-        Schema::create('criminal_fichier', function (Blueprint $table) {
+        Schema::create('victime_fichier', function (Blueprint $table) {
             $table->id();
             $table->uuid("fichier_id");
-            $table->uuid("criminal_id");
+            $table->uuid("victime_id");
             $table->foreign("fichier_id")->references("id")->on("fichiers")->onDelete("cascade");
-            $table->foreign("criminal_id")->references("id")->on("criminals")->onDelete("cascade");
+            $table->foreign("victime_id")->references("id")->on("victimes")->onDelete("cascade");
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateCriminalFichierTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('criminal_fichier');
+        Schema::dropIfExists('table');
     }
 }

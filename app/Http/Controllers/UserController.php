@@ -37,7 +37,7 @@ class UserController extends Controller
             'userToken' => $token,
             'userID' => $user->id,
             'userRole' => $user->role,
-            'userName' => $user->name
+            'userVille' => $user->ville
         ], 200);
     }
 
@@ -74,7 +74,8 @@ class UserController extends Controller
     public function register(RegistrationFormRequest $request)
     {
         $user = new User();
-        $user->name = $request->name;
+        $user->nom = $request->nom;
+        $user->adresse = $request->adresse;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->ville = $request->ville;
@@ -107,7 +108,8 @@ class UserController extends Controller
     }
     public function update(Request $request){
         $user = User::Find($request->id);
-        $user->name = $request->name;
+        $user->adresse = $request->adresse;
+        $user->nom = $request->nom;
         if ($user->email != $request->email){
             $user->email = $request->email;
         }
